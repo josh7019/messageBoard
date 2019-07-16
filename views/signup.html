@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" 
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src='../go.js'></script>
+    <title>Document</title>
+    <style>
+        .myform{
+            margin-top:30%;border:solid 1px;width:50%;margin-left:25%;text-align:center;border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        
+        <form class="form-horizontal myform" method='POST' action='cont/signup.php' onsubmit="return isSubmit();">
+        <fieldset>
+
+        <!-- Form Name -->
+        <legend>註冊</legend>
+
+        <!-- 帳號輸入 -->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="Account">帳號</label><span id='account_Signal'></span>
+        <div class="col-md-4">
+        <input id="account" onchange="checkAccountFormat(event)" name="account" type="text" placeholder="請輸入帳號" class="form-control input-md" required="">    
+        <span class="help-block">至少7位,開頭為英文,不得有符號</span> 
+        </div>
+        </div>
+
+        <!-- 密碼輸入-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="password">密碼</label><span id='password_Signal'></span>  
+        <div class="col-md-4">
+        <input id="password" onchange="checkPassword(event)" name="password" type="password" placeholder="請輸入密碼" class="form-control input-md" required="">
+        <span class="help-block">至少4位,不得有符號</span> 
+        </div>
+        </div>
+
+        <!-- 二次密碼輸入-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="password">驗證密碼</label><span id='passwordTwice_Signal'></span>
+        <div class="col-md-4">
+        <input id="passwordTwice" onchange='confirmPassword(event)' name="passwordTwice" type="password" placeholder="請再次輸入密碼" class="form-control input-md" required="">
+            
+        </div>
+        </div>
+
+        <!-- 送出按鈕 -->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="login"></label>
+        <div class="col-md-4">
+            <button id="login" name="signup" class="btn btn-success">註冊</button>
+        </div>
+        </div>
+
+        </fieldset>
+        </form>
+    </div>
+    
+    <script>
+        let isAccountRight=false;
+        let isPasswordRight=false;
+        let isPasswordTwice=false;
+        
+        //檢查帳號格式與資料庫有無相同帳號 
+        function checkAccountFormat(e){
+            if(checkFormat(e.target.value)){                
+                // ajax 到後端檢查帳號是否存在
+                $.ajax({
+                    type:'post',
+                    url:'cont/getaccount.php',
+                    data:{account:e.target.value},
+                    //num_rows為查詢資料筆數
+                    success:function(num_rows){
+                        if(num_rows>0){
+                            alert(num_rows)
+                            isAccountRight=false;
+                            alert(isAccountRight);
+                            $('#account_Signal').html('已有相同帳號');       
+                        }else{
+                            $('#account_Signal').html('ok');
+                            isAccountRight=true;
+                        } 
+                    }
+                })
+            }else{
+                $('#account_Signal').html('x');
+                isAccountRight=false;
+            }
+        }
+        
+        //檢查密碼格式
+        function checkPassword(e){
+            if(checkPasswordFormat(e.target.value)){
+                isPasswordRight=true;
+                $('#password_Signal').html('ok');
+            }else{
+                isPasswordRight=false;
+                $('#password_Signal').html('格式錯誤');
+            }
+
+        }
+        
+        //二次驗證輸入密碼
+        function confirmPassword(e){
+            let password='';
+            password=$('#password').val();
+            if(e.target.value==password){
+                isPasswordTwice=true;
+                $('#passwordTwice_Signal').html('ok');
+            }else{
+                isPasswordTwice=false;
+                $('#passwordTwice_Signal').html('密碼不相同');
+            }
+            
+        }
+        
+        //格式驗證正確後submit才能激活
+        function isSubmit(){
+            return (isAccountRight&&isPasswordRight&&isPasswordTwice)?true:false;  
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-<?php require_once('../api.php'); ?>
+<?php require_once('../command.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,8 +28,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <li class="a"><a href="#">登出 <span class="sr-only"></span></a></li>
-            <li><a href="#">註冊?</a></li>
+            <!-- <li class="a"><a href="../cont/signout.php">登出 <span class="sr-only"></span></a></li>
+            <li><a href="signup.php">註冊?</a></li> -->
+            <li class="a"><?php printLink();?></li>
         </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -39,56 +40,46 @@
     <div class='container'>
         <div id="nowTime"></div>
         <div>
-            <!-- 待辦新增表格 -->
+            <!-- 留言新增表格 -->
             <div id='addTodoList'>
-                <form class="form-horizontal">
+                <form class="form-horizontal" method='POST' action='../cont/addmessage.php'>
                         <fieldset>
                         
                         <!-- Form Name -->
                         <legend>留言板</legend>
                         
-                        <!-- Text input-->
-                        <!-- <div class="form-group">
-                          <label class="col-md-4 control-label" for="textinput">待辦日期</label>  
-                          <div class="col-md-4">
-                          <input id="textinput" name="textinput" type="date" placeholder="" class="form-control input-md">
-                            
-                          </div>
-                        </div> -->
-                        
-                        <!-- Text input-->
+                        <!-- 標題-->
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textinput">標題</label>  
                           <div class="col-md-4">
-                          <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                          <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md">
                             
                           </div>
                         </div>
                         
-                        <!-- Textarea -->
+                        <!-- 內容 -->
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textarea">內容</label>
                           <div class="col-md-4">                     
-                            <textarea  class="form-control" id="textarea" name="textarea"></textarea>
+                            <textarea  class="form-control" id="textarea" name="content"></textarea>
                           </div>
                         </div>
                         
-                        <!-- Button -->
+                        <!-- 按鈕 -->
                         <div class="form-group">
                           <label class="col-md-4 control-label" for=""></label>
                           <div class="col-md-4">
-                            <button type="button" class="btn btn-primary">Add</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
                           </div>
                         </div>
                         
                         </fieldset>
                         </form>
-                <!-- <h1>{{todoWhat}}</h1><br>
-                <h1>{{todoContent}}</h1> -->
-            </div><!-- 待辦新增表格結束 -->
+                
+            </div><!-- 留言新增表格結束 -->
             
 
-            <!-- 待辦清單顯示區 -->
+            <!-- 留言顯示區 -->
                 <table class="table table-striped" id='showTodoList'>
                     <thead>
                         <tr>
@@ -99,7 +90,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php showMessage() ?>
+                        <?php printMessage() ?>
                         <tr >
                         <!-- style='border:solid' -->
                             <td >not yet</td>
@@ -121,15 +112,23 @@
                             </td>               
                         </tr>
                     </tbody>
-                </table><!-- 待辦清單顯示區結束 -->            
+                </table><!-- 留言顯示區結束 -->            
         </div>
     </div>
+    <input type="hidden" id='message' value='<?php echo (isset($_SESSION['message']))?$_SESSION['message']:''; ?>'>
     <script>
         setInterval(function(){
             document.getElementById('nowTime').innerHTML=nowtime();
         },1000)
-        
-        
+        window.onload=function(){
+            // let message=$('#message').val();
+            // if(message!=''){
+            // alert(message);
+            // }
+            showMessage();
+        }
     </script>
+    <!-- 清除message -->
+    <?php clearmessage();?>
 </body>
 </html>

@@ -1,3 +1,5 @@
+<?php require_once('../command.php');?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,9 +18,8 @@
     </style>
 </head>
 <body>
-    <div class='container'>
-        
-        <form class="form-horizontal myform" method='POST' action='cont/signup.php' onsubmit="return isSubmit();">
+    <div class='container'>        
+        <form class="form-horizontal myform" method='POST' action='../cont/signup.php' onsubmit="return isSubmit();">
         <fieldset>
 
         <!-- Form Name -->
@@ -28,7 +29,7 @@
         <div class="form-group">
         <label class="col-md-4 control-label" for="Account">帳號</label><span id='account_Signal'></span>
         <div class="col-md-4">
-        <input id="account" onchange="checkAccountFormat(event)" name="account" type="text" placeholder="請輸入帳號" class="form-control input-md" required="">    
+        <input id="account" oninput="checkAccountFormat(event)" name="account" type="text" placeholder="請輸入帳號" class="form-control input-md" required="">    
         <span class="help-block">至少7位,開頭為英文,不得有符號</span> 
         </div>
         </div>
@@ -37,7 +38,7 @@
         <div class="form-group">
         <label class="col-md-4 control-label" for="password">密碼</label><span id='password_Signal'></span>  
         <div class="col-md-4">
-        <input id="password" onchange="checkPassword(event)" name="password" type="password" placeholder="請輸入密碼" class="form-control input-md" required="">
+        <input id="password" oninput="checkPassword(event)" name="password" type="password" placeholder="請輸入密碼" class="form-control input-md" required="">
         <span class="help-block">至少4位,不得有符號</span> 
         </div>
         </div>
@@ -46,7 +47,7 @@
         <div class="form-group">
         <label class="col-md-4 control-label" for="password">驗證密碼</label><span id='passwordTwice_Signal'></span>
         <div class="col-md-4">
-        <input id="passwordTwice" onchange='confirmPassword(event)' name="passwordTwice" type="password" placeholder="請再次輸入密碼" class="form-control input-md" required="">
+        <input id="passwordTwice" oninput='confirmPassword(event)' name="passwordTwice" type="password" placeholder="請再次輸入密碼" class="form-control input-md" required="">
             
         </div>
         </div>
@@ -62,9 +63,9 @@
         </fieldset>
         </form>
     </div>
-    
+    <input type="hidden" id='message' value='<?php echo (isset($_SESSION['message']))?$_SESSION['message']:''; ?>'>
     <script>
-        let isAccountRight=false;
+        let isAccountRight=true;
         let isPasswordRight=false;
         let isPasswordTwice=false;
         
@@ -74,14 +75,14 @@
                 // ajax 到後端檢查帳號是否存在
                 $.ajax({
                     type:'post',
-                    url:'cont/getaccount.php',
+                    url:'../cont/getaccount.php',
                     data:{account:e.target.value},
                     //num_rows為查詢資料筆數
                     success:function(num_rows){
                         if(num_rows>0){
-                            alert(num_rows)
+                            // alert(num_rows)
                             isAccountRight=false;
-                            alert(isAccountRight);
+                            // alert(isAccountRight);
                             $('#account_Signal').html('已有相同帳號');       
                         }else{
                             $('#account_Signal').html('ok');
@@ -125,8 +126,17 @@
         function isSubmit(){
             return (isAccountRight&&isPasswordRight&&isPasswordTwice)?true:false;  
         }
-
+        
+        //若有訊息則跳出訊息視窗
+        window.onload=function(){
+            // let message=$('#message').val();
+            // if(message!=''){
+            // alert(message);
+            // }
+            showMessage();
+        }  
     </script>
-
+    <!-- 清除message -->
+    <?php clearmessage();?>
 </body>
 </html>

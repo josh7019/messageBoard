@@ -30,3 +30,13 @@ function checkPasswordFormat(str){
         return false;
     }
 }
+
+
+
+
+function showMessage(){
+    let message=$('#message').val();
+    if(message!=''){
+        alert(message);
+    }
+}

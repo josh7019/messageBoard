@@ -1,5 +1,5 @@
 <?php     
-    // 取得帳號
+    // 檢查是否有相同帳號
     
     require_once('../mysql/connect.php');
     if(isset($_POST['account'])){

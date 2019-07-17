@@ -1,3 +1,4 @@
+<?php require_once('../command.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +29,7 @@
         <div class="form-group">
         <label class="col-md-4 control-label" for="Account">帳號</label>  
         <div class="col-md-4">
-        <input id="account" onchange="checkAccountFormat(event)" name="account" type="text" placeholder="請輸入帳號" class="form-control input-md" required="">
+        <input id="account" oninput="checkAccountFormat(event)" name="account" type="text" placeholder="請輸入帳號" class="form-control input-md" required="">
             
         </div>
         </div>
@@ -37,7 +38,7 @@
         <div class="form-group">
         <label class="col-md-4 control-label" for="password">密碼</label>  
         <div class="col-md-4">
-        <input id="password" onchange="checkPassword(event)" name="password" type="password" placeholder="請輸入密碼" class="form-control input-md" required="">
+        <input id="password" oninput="checkPassword(event)" name="password" type="password" placeholder="請輸入密碼" class="form-control input-md" required="">
             
         </div>
         </div>
@@ -54,9 +55,11 @@
         </fieldset>
         </form>
     </div>
+    <input type="hidden" id='message' value='<?php echo (isset($_SESSION['message']))?$_SESSION['message']:''; ?>'>
     <script>
-        let isAccountRight=false;
+        let isAccountRight=true;
         let isPasswordRight=false;
+        
         function checkAccountFormat(e){
             isAccountRight=(checkFormat(e.target.value))?true:false;
         }
@@ -75,7 +78,15 @@
                 return false;
             }
         }
+        window.onload=function(){
+            // let message=$('#message').val();
+            // if(message!=''){
+            // alert(message);
+            // }
+            showMessage();
+        }
     </script>
-
+    <!-- 清除message -->
+    <?php clearmessage();?>
 </body>
 </html>

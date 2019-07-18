@@ -7,6 +7,7 @@
     $pre->bind_result($messageId,$userId,$title,$content,$created_at,$updated_at,$account);
     // $messageItem=new messageItem;
     $messageList=[];
+    
     // echo $pre->num_rows;
     if($pre->num_rows>0){
         while($pre->fetch()){

@@ -133,7 +133,7 @@
         let postData={'messageId':messageId};
         $.ajax({
             type:'post',
-            url:'../cont/select_edit_message.php',
+            url:'../cont/select_detail_message.php',
             data:postData,
             success:function(messageItem){
                 messageItem=JSON.parse(messageItem)

@@ -38,9 +38,9 @@
     
     
     <div class="container-fluid">
-	<div class="row" style="margin-top:10%">
-		<div class='col-md-3'></div>
-        <div class="col-md-6">
+	<div class="row" style="margin-top:5%">
+		<div class='col-md-4'></div>
+        <div class="col-md-4">
 			<div class="list-group">
 				 <a  class="list-group-item list-group-item-action active" id='title'></a>
 				<div class="list-group-item" style='background-color:GhostWhite' id='userName'>
@@ -54,7 +54,7 @@
 				<div class="list-group-item justify-content-between" style='background-color:GhostWhite' id='timeAndThumb'>
 					2017-08-25 08:08:08<span class="badge badge-secondary badge-pill">讚15</span>
 				</div> 
-                <a href="#" class="list-group-item list-group-item-action justify-content-between">展開回覆<span class="badge badge-light badge-pill" id='replyCount'>14則</span></a>
+                <a onclick='' class="list-group-item list-group-item-action justify-content-between">展開回覆<span class="badge badge-light badge-pill" id='replyCount'>14則</span></a>
 			</div>
 		</div>
 	</div>
@@ -73,7 +73,7 @@
             $('#title').html(`標題:${messageItem.title}`);
             $('#userName').html(`${messageItem.account}說:`);
             $('#content').html(`${messageItem.content}`);
-            $('#timeAndThumb').html(`${messageItem.updated_at}<span class="badge badge-secondary badge-pill">讚15</span>`);
+            $('#timeAndThumb').html(`${messageItem.updated_at}<span class="badge badge-secondary badge-pill">讚:${messageItem.thumbCount}</span>`);
         }
     </script>
 </body>

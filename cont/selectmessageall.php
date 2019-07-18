@@ -27,10 +27,10 @@
             // echo $updated_at."<br>";
             // var_dump($messageItem);
         }
-        $userId=(isset($_SESSION['userId']))?$_SESSION['userId']:-1;
+        $loginUserId=(isset($_SESSION['userId']))?$_SESSION['userId']:-1;
         
         $data=[
-            'userId'=>$userId,
+            'loginUserId'=>$loginUserId,
             'messageList'=>$messageList
         ];
             

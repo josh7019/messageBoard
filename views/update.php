@@ -42,7 +42,7 @@
         <div>
             <!-- 留言新增表格 -->
             <div id='addTodoList'>
-                <form class="form-horizontal" method='POST' action='../cont/addmessage.php'>
+                <form class="form-horizontal" id='editMessage'>
                         <fieldset>
                         
                         <!-- Form Name -->
@@ -52,7 +52,7 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textinput">標題</label>  
                           <div class="col-md-4">
-                          <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md">
+                          <input id="title" name="title" type="text" placeholder="" class="form-control input-md">
                             
                           </div>
                         </div>
@@ -61,7 +61,7 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textarea">內容</label>
                           <div class="col-md-4">                     
-                            <textarea  class="form-control" id="textarea" name="content"></textarea>
+                            <textarea  class="form-control" id="content" name="content"></textarea>
                           </div>
                         </div>
                         
@@ -69,11 +69,12 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for=""></label>
                           <div class="col-md-4">
-                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>修改</button>
+                            <button type="button" onclick="editMessage()" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>修改</button>
                             <a href='index.php' class="btn btn-info">取消</a>
                           </div>
                         </div>
                         
+
                         </fieldset>
                         </form>
                 
@@ -99,6 +100,13 @@
             showMessage();
         }
         selectEditMessage();
+
+        function printEditMessage(messageItem){
+            messageItem=JSON.parse(messageItem);
+                // console.log(messageItem.title)
+                $('#title').val(messageItem.title);
+                $('#content').val(messageItem.content);
+        }
     </script>
     <!-- 清除message -->
     <?php clearmessage();?>

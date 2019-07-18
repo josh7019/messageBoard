@@ -36,7 +36,7 @@
         }
     }
 
-//取得資料庫留言
+//取得資料庫所有留言
     function goSelectMessage(){
         
         $.ajax({
@@ -63,12 +63,12 @@
             row += `
             <tr>
                 <td>${messageItem.account}</td>
-                <td><a href='#'>${messageItem.title}</a></td>
+                <td><a href='message_detail.php?messageId=${messageItem.messageId}'>${messageItem.title}</a></td>
                 <td>${messageItem.messageId}</td>
                 <td>${messageItem.created_at}</td>
                 <td style="width:300px">
                     <span class=pull-right>`;
-            row += (messageObject['userId'] == messageItem.userId) ? `
+            row += (messageObject['loginUserId'] == messageItem.userId) ? `
                         <a href='update.php?messageId=${messageItem.messageId}' class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>編輯</a>
                         <button class="btn btn-danger" onclick='deleteMessage(${messageItem.messageId})'><span class="glyphicon glyphicon-trash"></span>刪除</button>`: '';
             row += `
@@ -101,18 +101,69 @@
         })
     }
 
-    //
+    //取得編輯留言資料
     function selectEditMessage(){
         let url=String(window.location);
         let messageId=url.substring((url.indexOf('=')+1),url.length);
-        alert(messageId);
+        // alert(messageId);
         let postData={'messageId':messageId};
         $.ajax({
             type:'post',
             url:'../cont/select_edit_message.php',
             data:postData,
-            success:function(){
-                alert('ok');
+            success:function(messageItem){
+                printEditMessage(messageItem);
+            }
+            // 
+            // function(messageItem){       
+            //     messageItem=JSON.parse(messageItem);
+            //     // console.log(messageItem.title)
+            //     $('#title').val(messageItem.title);
+            //     $('#content').val(messageItem.content);
+            // }
+        });
+    }
+
+
+    //取得留言資料細節
+    function selectDetailMessage(){
+        let url=String(window.location);
+        let messageId=url.substring((url.indexOf('=')+1),url.length);
+        // alert(messageId);
+        let postData={'messageId':messageId};
+        $.ajax({
+            type:'post',
+            url:'../cont/select_edit_message.php',
+            data:postData,
+            success:function(messageItem){
+                messageItem=JSON.parse(messageItem)
+                console.log(messageItem);
+                printDetailMessage(messageItem);
             }
         });
+    }
+    
+    
+    
+    // 送出編輯留言
+    function editMessage(){
+        if(!confirm('確定修改嗎?')){
+            return;
+        }
+        let url=String(window.location);
+        let messageId=url.substring((url.indexOf('=')+1),url.length);
+        let messageItem={
+            'messageId':messageId,
+            'title':$('#title').val(),
+            'content':$('#content').val()
+        }
+        console.log(messageItem);
+        $.ajax({
+            type:'post',
+            url:'../cont/edit_message.php',
+            data:messageItem,
+            success:function(){
+                window.location='index.php';            
+            }
+        })
     }

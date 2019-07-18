@@ -12,6 +12,6 @@
         // echo $pre->num_rows;
         echo $result->num_rows;
     }else{
-        echo 'wrong';
+        echo $result->num_rows;
     }
 ?>

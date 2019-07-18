@@ -3,7 +3,7 @@
     
     require_once('../mysql/connect.php');
     
-    if(isset($_POST['account'])){
+    if(isset($_POST['account']) && !(isset($_SESSION['userId']))){
         
         $account=$_POST['account'];
         $password=$_POST['password'];
@@ -46,5 +46,13 @@
         // echo $account;
         // echo $password;
         // exit;
+    }else if(isset($_SESSION['userId'])){
+        $_SESSION['message']='重複登入';
+                header('Location:../views/index.php');
+                exit();
+    }else{
+        $_SESSION['message']='登入失敗';
+                header('Location:../views/login.php');
+                exit();
     }
 ?>

@@ -1,7 +1,7 @@
 <?php
     require_once('../mysql/connect.php');
     require_once('../command.php');
-    if(isset($_POST['title'])){
+    if(isset($_POST['title'])&&(isset($_SESSION['userId']))){
         $userId=$_SESSION['userId'];
         $title=$_POST['title'];
         $content=$_POST['content'];
@@ -16,7 +16,11 @@
         // echo $pre->affected_rows;
         $_SESSION['message']='新增成功';
         header('Location:../views/index.php');
-    }else{
+    }else if(!isset($_SESSION['userId'])){
+        $_SESSION['message']='請先登入';
+        header('Location:../views/login.php');
+    }
+    else{
         $_SESSION['message']='新增失敗';
         header('Location:../views/index.php');
     }

@@ -46,7 +46,7 @@
                         <fieldset>
                         
                         <!-- Form Name -->
-                        <legend>留言板</legend>
+                        <legend>編輯留言</legend>
                         
                         <!-- 標題-->
                         <div class="form-group">
@@ -69,7 +69,8 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for=""></label>
                           <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>修改</button>
+                            <a href='index.php' class="btn btn-info">取消</a>
                           </div>
                         </div>
                         
@@ -77,41 +78,7 @@
                         </form>
                 
             </div><!-- 留言新增表格結束 -->
-            
-
-            <!-- 留言顯示區 -->
-                <table class="table table-striped" id='showTodoList'>
-                    <thead>
-                        <tr>
-                            <th>留言人</th>
-                            <th>標題</th>
-                            <th>讚</th>
-                            <th>留言時間</th>
-                        </tr>
-                    </thead>
-                    <tbody id='messageArea'>
-                        <!-- <tr >
-                            <td >not yet</td>
-                            <td ><a href="#">not yet</a> </td>
-                            <td >not yet</td>
-                            <th >not yet</th>
-                            <td style='width:300px'>
-                            <span class=pull-right>
-                            
-                            <button class="btn btn-success">
-                                <span class='glyphicon glyphicon-pencil'></span>編輯
-                            </button> | 
-                            <button class="btn btn-danger">
-                                <span class='glyphicon glyphicon-trash'></span>刪除
-                            </button>
-                            <button class="btn btn-info">
-                                <span class='glyphicon glyphicon-thumbs-up'></span>讚
-                            </button> | 
-                            </span>
-                            </td>               
-                        </tr> -->
-                    </tbody>
-                </table><!-- 留言顯示區結束 -->            
+                   
         </div>
     </div>
     <input type="hidden" id='message' value='<?php echo (isset($_SESSION['message']))?$_SESSION['message']:''; ?>'>
@@ -131,8 +98,7 @@
         window.onload=function(){
             showMessage();
         }
-        //從資料庫取資料並顯示留言
-        goSelectMessage();
+        selectEditMessage();
     </script>
     <!-- 清除message -->
     <?php clearmessage();?>

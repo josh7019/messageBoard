@@ -30,10 +30,10 @@
         // $pattern='/"/i';
         $text=preg_replace("/&/","&apos;",$text);
         $text=preg_replace("/'/","&apos;",$text);
-        $text=str_replace('/"/',"&quot;",$text);
-        $text=str_replace('/</',"&lt;",$text);
-        $text=str_replace('/>/',"&gt;",$text);
-        $text=str_replace('/ /',"&nbsp;",$text);
+        $text=preg_replace('/"/',"&quot;",$text);
+        $text=preg_replace('/</',"&lt;",$text);
+        $text=preg_replace('/>/',"&gt;",$text);
+        $text=preg_replace('/ /',"&nbsp;",$text);
         return $text;
     }
 ?>

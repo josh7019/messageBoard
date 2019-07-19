@@ -5,7 +5,7 @@
     }
     $messageId=$_POST['messageId'];
     $sql='SELECT m.messageId,m.userId,m.title,m.content,m.created_at,m.updated_at,u.account FROM message m join user u ON(m.userid=u.userid) where messageId=?';
-    // $sql="select * from message where messageId=?";
+    $sql="select * from message where messageId=?";
     $pre=$mysqli->prepare($sql);
     $pre->bind_param('i',$messageId);
     $pre->execute();
@@ -25,6 +25,15 @@
     }
 
     
-    // echo $data;
-    echo json_encode($data);
+    // // echo $data;
+    // echo json_encode($data);
+
+
+    // require_once('../mysql/Model.php');
+    // if(!isset($_POST['messageId'])){
+    //     $_SESSION['message']='留言不存在';
+    // }
+    // $messageId=$_POST['messageId'];
+    // $model=new Model;
+    // $message
 ?>

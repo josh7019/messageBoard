@@ -64,19 +64,19 @@
             <tr>
                 <td>${messageItem.account}</td>
                 <td><a href='message_detail.php?messageId=${messageItem.messageId}'>${messageItem.title}</a></td>
-                <td>${messageItem.messageId}</td>
+                <td>${messageItem.thumbCount}</td>
                 <td>${messageItem.created_at}</td>
                 <td style="width:300px">
                     <span class=pull-right>`;
             row += (messageObject['loginUserId'] == messageItem.userId) ? `
                         <a href='update.php?messageId=${messageItem.messageId}' class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>編輯</a>
                         <button class="btn btn-danger" onclick='deleteMessage(${messageItem.messageId})'><span class="glyphicon glyphicon-trash"></span>刪除</button>`: '';
-            row += `
+            row += (!messageItem.isthumb)?`
                         <button class="btn btn-info" onclick='giveThumb(${messageItem.messageId},${messageItem.userId})'><span class="glyphicon glyphicon-thumbs-up"></span>讚</button>
-                    </span>
+                    `:` <button class="btn btn-warning" onclick='removeThumb(${messageItem.messageId},${messageItem.userId})'>收 <span class="glyphicon glyphicon-thumbs-down"></span></button>`;
+            row +=`</span>
                 </td>
-            </tr>`
-
+            </tr>`;
             messageArea.innerHTML += row;
         }
     }
@@ -164,6 +164,38 @@
             data:messageItem,
             success:function(){
                 window.location='index.php';            
+            }
+        })
+    }
+
+
+    function giveThumb(messageId,userId){
+        $.ajax({
+            type:'post',
+            url:'../cont/thumb.php',
+            data:{
+                'messageId':messageId,
+                'userId':userId,
+                'addOrRemove':'add'
+            },
+            success:function(e){
+                console.log(e);
+                goSelectMessage();
+            }
+        })
+    }
+    function removeThumb(messageId,userId){
+        $.ajax({
+            type:'post',
+            url:'../cont/thumb.php',
+            data:{
+                'messageId':messageId,
+                'userId':userId,
+                'addOrRemove':'remove'
+            },
+            success:function(e){
+                console.log(e);
+                goSelectMessage();
             }
         })
     }

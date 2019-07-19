@@ -2,7 +2,7 @@
     date_default_timezone_set('Asia/Taipei');
     session_start();
     $mysqli=new mysqli("localhost",'root','','messageboard2');
-    $mysqli->set_charset('utf-8');
+    $mysqli->set_charset('utf8');
     
 
 

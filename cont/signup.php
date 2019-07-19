@@ -22,7 +22,7 @@
         Header("Location:../views/login.php"); 
         exit;
     }else if(isset($_SESSION['userId'])){
-        $_SESSION['message']='請先登出再註冊';
+        $_SESSION['message']='請先登出再註冊 ';
                 header('Location:../views/index.php');
                 exit();
     }else{

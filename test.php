@@ -59,7 +59,7 @@
         }
         
         
-        ###############################  SELECT TEST AREA   ############################
+        ###############################  SELECT_ALL TEST AREA   ############################
         public function select_all($table,$select_list){
             $select_string='';
             foreach($select_list as $select_single){
@@ -93,9 +93,43 @@
         }
         // echo select_all('user',['*']);
     
-        ###############################  SELECT TEST AREA END  ############################
+        ###############################  SELECT_ALL TEST AREA END  ############################
 
 
+        ###############################  SELECT_SINGLE TEST AREA END  ############################
+        
+        function select_single($table,$select_list,$where_colum_list,$where_value_list,$type_string){
+            $where_colum_string='';
+            $where_value_string='';
+            $select_string='';
+            ##組成select字串
+            foreach($select_list as $select_single){
+                $select_string.=$select_single.',';
+            }
+            ##組成where字串
+            foreach($where_colum_list as $where_colum){
+                $where_colum_string.=$where_colum.',';
+            }
+            foreach($where_value_list as $where_value){
+                $where_value_string.='?,';
+            }
+            ##去逗號
+            $where_colum_string=substr($where_colum_string,0,strlen($where_colum_string)-1);
+            $where_value_string=substr($where_value_string,0,strlen($where_value_string)-1);
+            $select_string=substr($select_string,0,strlen($select_string)-1);
+
+            $sql="select $select_string from $table 
+            where ({$where_colum_string}) = ($where_value_string)";
+            $pre=$this->mysqli->prepare($sql);
+            $pre->bind_param($type_string,...$where_value_list);
+            $pre->execute();
+            $pre->store_result();
+            return $pre->num_rows;
+        }
+        
+        
+        
+        
         ###############################  INSERT TEST AREA   ############################
         
         public function insert_into($table,$insert_colum_list,$insert_value_list,$type_string){
@@ -121,15 +155,71 @@
             return $pre->affected_rows;
         }
         ###############################  INSERT TEST AREA END  ############################
+    
+        
+        
+        ###############################  DELETE TEST AREA START  ############################
+        
+        
+        public function delete($table,$where_colum_list,$where_value_list,$type_string){
+            $where_colum_string='';
+            $where_value_string='';
+            ##組成where字串
+            foreach($where_colum_list as $where_colum){
+                $where_colum_string.=$where_colum.',';
+            }
+            foreach($where_value_list as $where_value){
+                $where_value_string.='?,';
+            }
+            ##去逗號
+            $where_colum_string=substr($where_colum_string,0,strlen($where_colum_string)-1);
+            $where_value_string=substr($where_value_string,0,strlen($where_value_string)-1);
+            $sql="delete from $table where ($where_colum_string) = ($where_value_string)";
+            echo $sql;
+            $pre=$this->mysqli->prepare($sql);
+            $pre->bind_param($type_string,...$where_value_list);
+            $pre->execute();
+            return $pre->affected_rows;
+        }
+        ###############################  DELETE TEST AREA END  ############################
+
+
+        ###############################  UPDATE TEST AREA   ############################
+    
+        public function update($table,$set_colum_list,$set_value_list,$where_colum_list,$where_value_list,$type_string){
+            $test="update table set a=?,b=? where id=?";
+            $set_colum_string='';
+            $where_colum_string='';
+            $where_value_string='';
+            ##組成set字串
+            foreach($set_colum_list as $set_colum){
+                $set_colum_string.=$set_colum.'=?,';
+            }
+            ##組成where字串
+            foreach($where_colum_list as $where_colum){
+                $where_colum_string.=$where_colum.',';
+            }
+            foreach($where_value_list as $where_value){
+                $where_value_string.='?,';
+            }
+            ##去逗號
+            $where_colum_string=substr($where_colum_string,0,strlen($where_colum_string)-1);
+            $where_value_string=substr($where_value_string,0,strlen($where_value_string)-1);
+            $set_colum_string=substr($set_colum_string,0,strlen($set_colum_string)-1);
+            $sql="update $table set $set_colum_string where ($where_colum_string) = ($where_value_string)";
+            // echo $sql;
+            $pre=$this->mysqli->prepare($sql);
+            $pre->bind_param($type_string,...$set_value_list,...$where_value_list);
+            $pre->execute();
+            return $pre->affected_rows;
+        }
+
+        ###############################  UPDATE TEST AREA END  ############################
     }
 
-    function delete($table,$where_colum_list,$where_value_list){
-        $where_colum_string='';
-        $where_value_string='';
-        
-    }
     
-    //  $a=new Model();
-     echo $a->insert_into('message',['userId','title','content'],[19,"test","test"],'iss');
-    echo json_encode($a->select_all('user',['*'])); 
+    
+     $a=new Model();
+     echo $a->update('message',["title",'content'],[3,2],['messageId',"userId"],[2,1],"ssii");
+    // echo json_encode($a->select_all('user',['*'])); 
 ?>

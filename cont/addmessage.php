@@ -6,7 +6,7 @@
         $title=$_POST['title'];
         $content=$_POST['content'];
         $message_model=new Message;
-        $is_success=$message_model->add_one($userId,$title,$content);
+        $is_success=$message_model->addOne($userId,$title,$content);
         $_SESSION['message']='新增成功';
         header('Location:../views/index.php');
     }else if(!isset($_SESSION['userId'])){

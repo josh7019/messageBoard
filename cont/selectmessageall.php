@@ -4,7 +4,7 @@
     $loginUserId=(isset($_SESSION['userId']))?$_SESSION['userId']:-1;
     try {
         $message_model=new Message;
-    $message_list_detail=$message_model->get_all_detail($loginUserId);
+    $message_list_detail=$message_model->getAllDetail($loginUserId);
     // var_dump($message_list_detail);
     
     $data=[

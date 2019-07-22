@@ -73,7 +73,7 @@
             $('#title').html(`標題:${messageItem.title}`);
             $('#userName').html(`${messageItem.account}說:`);
             $('#content').html(`${messageItem.content}`);
-            $('#timeAndThumb').html(`${messageItem.updated_at}<span class="badge badge-secondary badge-pill">讚:${messageItem.thumbCount}</span>`);
+            $('#timeAndThumb').html(`${messageItem.updated_at}<span class="badge badge-secondary badge-pill">讚:${messageItem.thumb_count}</span>`);
         }
     </script>
 </body>

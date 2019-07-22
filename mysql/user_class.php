@@ -1,19 +1,38 @@
 <?php
     include_once('model.php');
 
-    class User extends Model{
+    class User extends Model
+    {
         private $table='User';
         
+        
         ##取得單一使用者資料
-        public function get_one($userId){
-            $user=$this->select_single('user',['*'],['userId'],[$userId],'i');
+        public function getOneByUserId($userId)
+        {
+            $user=$this->selectSingle('user',['*'],['userId'],[$userId],'i');
             return $user;
         }
-
+        
+        
+        public function getOneByAccount($account)
+        {
+            $user=$this->selectSingle('user',['*'],['account'],[$account],'s');
+            return $user;
+        }
+        
+        
         ##取得所有使用者資料
-        public function get_all(){
-            $userList=$this->select_all($this->table,['*']);
+        public function getAll()
+        {
+            $userList=$this->selectAll($this->table,['*']);
             return $userList;
+        }
+
+        
+        public function signup($account,$password)
+        {
+            $is_success=$this->insertInto($this->table,['account','password'],[$account,$password],'ss');
+            return $is_success;
         }
 
     }

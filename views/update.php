@@ -106,6 +106,7 @@
                 // console.log(messageItem.title)
                 $('#title').val(messageItem.title);
                 $('#content').val(messageItem.content);
+            // console.log(messageItem);
         }
     </script>
     <!-- 清除message -->

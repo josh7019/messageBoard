@@ -16,7 +16,7 @@
         
         
         ###############################  SELECT_ALL TEST AREA   ############################
-        public function select_all($table,$select_list){
+        public function selectAll($table,$select_list){
             $select_string='';
             foreach($select_list as $select_single){
                 $select_string.=$select_single.',';
@@ -54,7 +54,7 @@
 
         ###############################  SELECT_SINGLE TEST AREA END  ############################
         
-        function select_single($table,$select_list,$where_colum_list,$where_value_list,$type_string){
+        function selectSingle($table,$select_list,$where_colum_list,$where_value_list,$type_string){
             $where_colum_string='';
             $where_value_string='';
             $select_string='';
@@ -95,7 +95,7 @@
         
         ###############################  INSERT TEST AREA   ############################
         
-        public function insert_into($table,$insert_colum_list,$insert_value_list,$type_string){
+        public function insertInto($table,$insert_colum_list,$insert_value_list,$type_string){
             
             $insert_colum_string='';
             $insert_value_string='';
@@ -150,7 +150,6 @@
         ###############################  UPDATE TEST AREA   ############################
     
         public function update($table,$set_colum_list,$set_value_list,$where_colum_list,$where_value_list,$type_string){
-            $test="update table set a=?,b=? where id=?";
             $set_colum_string='';
             $where_colum_string='';
             $where_value_string='';

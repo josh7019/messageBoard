@@ -10,11 +10,11 @@
     
     if($addOrRemove=='add'){
         $thumb_model=new Thumb;
-        $is_success=$thumb_model->add_one($messageId,$userId);     
+        $is_success=$thumb_model->addOne($messageId,$userId);     
         echo ($is_success)?"insert":"fail insert";
     }else if($addOrRemove=='remove'){
         $thumb_model=new Thumb;
-        $is_success=$thumb_model->remove_thumb($messageId,$userId);        
+        $is_success=$thumb_model->removeThumb($messageId,$userId);        
         echo ($is_success)?"delete":"fail delete";
     }
 

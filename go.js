@@ -45,6 +45,7 @@
             data:{'get':'get'},
             // dataType:'json',
             success:function(messageList){
+                // console.log(messageList);
                 console.log(JSON.parse(messageList));
                 // alert('ajax ok');
                 printMessage(JSON.parse(messageList));
@@ -107,11 +108,13 @@
         let messageId=url.substring((url.indexOf('=')+1),url.length);
         // alert(messageId);
         let postData={'messageId':messageId};
+        // console.log(postData)
         $.ajax({
             type:'post',
             url:'../cont/select_edit_message.php',
             data:postData,
             success:function(messageItem){
+                // console.log(messageItem);
                 printEditMessage(messageItem);
             }
             // 

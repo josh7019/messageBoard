@@ -14,11 +14,11 @@
             $messageId=$_POST['messageId'];
             $userId=$_SESSION['userId'];
             $message_model=new Message();
-            $message_item=$message_model->get_one($messageId);
+            $message_item=$message_model->getOne($messageId);
             
                 if(count($message_item)>0){
                     if($message_item['userId']==$userId){
-                        $is_success=$message_model->delete_one($messageId);
+                        $is_success=$message_model->deleteOne($messageId);
                         $data=['message'=>($is_success)?'刪除成功':'刪除失敗'];
                         echo json_encode($data);
                     }else{

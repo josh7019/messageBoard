@@ -114,6 +114,7 @@
                             $('#account_Signal').html('ok');
                             isAccountRight=true;
                         } 
+                        // console.log(num_rows)
                     }
                 })
             }else{

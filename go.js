@@ -64,14 +64,14 @@
             <tr>
                 <td>${messageItem.account}</td>
                 <td><a href='message_detail.php?messageId=${messageItem.messageId}'>${messageItem.title}</a></td>
-                <td>${messageItem.thumbCount}</td>
+                <td>${messageItem.thumb_count}</td>
                 <td>${messageItem.created_at}</td>
                 <td style="width:300px">
                     <span class=pull-right>`;
             row += (messageObject['loginUserId'] == messageItem.userId) ? `
                         <a href='update.php?messageId=${messageItem.messageId}' class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>編輯</a>
                         <button class="btn btn-danger" onclick='deleteMessage(${messageItem.messageId})'><span class="glyphicon glyphicon-trash"></span>刪除</button>`: '';
-            row += (!messageItem.isthumb)?`
+            row += (!messageItem.is_thumb)?`
                         <button class="btn btn-info" onclick='giveThumb(${messageItem.messageId},${messageItem.userId})'><span class="glyphicon glyphicon-thumbs-up"></span>讚</button>
                     `:` <button class="btn btn-warning" onclick='removeThumb(${messageItem.messageId},${messageItem.userId})'>收 <span class="glyphicon glyphicon-thumbs-down"></span></button>`;
             row +=`</span>

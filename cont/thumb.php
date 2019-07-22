@@ -1,5 +1,5 @@
 <?php 
-    require_once('../mysql/connect.php');
+    require_once('../mysql/all.php');
     if(!isset($_POST['addOrRemove'])){
         exit();
     }else{
@@ -7,17 +7,29 @@
         $userId=$_SESSION['userId'];
         $addOrRemove=$_POST['addOrRemove'];
     }
+    
     if($addOrRemove=='add'){
-        $sql='insert into thumb (messageId,userId) values (?,?)';
-        $pre=$mysqli->prepare($sql);
-        $pre->bind_param('ii',$messageId,$userId);
-        $pre->execute();
-        echo "insert";
+        $thumb_model=new Thumb;
+        $is_success=$thumb_model->add_one($messageId,$userId);     
+        echo ($is_success)?"insert":"fail insert";
     }else if($addOrRemove=='remove'){
-        $sql='delete from thumb where messageId=? and userId=?';
-        $pre=$mysqli->prepare($sql);
-        $pre->bind_param('ii',$messageId,$userId);
-        $pre->execute();
-        echo "delete";
+        $thumb_model=new Thumb;
+        $is_success=$thumb_model->remove_thumb($messageId,$userId);        
+        echo ($is_success)?"delete":"fail delete";
     }
+
+
+
+
+    // $sql='insert into thumb (messageId,userId) values (?,?)';
+        // $pre=$mysqli->prepare($sql);
+        // $pre->bind_param('ii',$messageId,$userId);
+        // $pre->execute();
+
+    // $sql='delete from thumb where messageId=? and userId=?';
+        // $pre=$mysqli->prepare($sql);
+        // $pre->bind_param('ii',$messageId,$userId);
+        // $pre->execute();
+
+
 ?>

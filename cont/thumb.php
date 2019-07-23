@@ -1,35 +1,26 @@
 <?php 
     require_once('../mysql/all.php');
-    if(!isset($_POST['addOrRemove'])){
+    if(!isset($_POST['addOrRemove']))
+    {
         exit();
-    }else{
+    }else
+    {
         $messageId=$_POST['messageId'];
         $userId=$_SESSION['userId'];
         $addOrRemove=$_POST['addOrRemove'];
     }
     
-    if($addOrRemove=='add'){
+    if($addOrRemove=='add')
+    {
         $thumb_model=new Thumb;
         $is_success=$thumb_model->addOne($messageId,$userId);     
         echo ($is_success)?"insert":"fail insert";
-    }else if($addOrRemove=='remove'){
+    }else if($addOrRemove=='remove')
+    {
         $thumb_model=new Thumb;
         $is_success=$thumb_model->removeThumb($messageId,$userId);        
         echo ($is_success)?"delete":"fail delete";
     }
-
-
-
-
-    // $sql='insert into thumb (messageId,userId) values (?,?)';
-        // $pre=$mysqli->prepare($sql);
-        // $pre->bind_param('ii',$messageId,$userId);
-        // $pre->execute();
-
-    // $sql='delete from thumb where messageId=? and userId=?';
-        // $pre=$mysqli->prepare($sql);
-        // $pre->bind_param('ii',$messageId,$userId);
-        // $pre->execute();
 
 
 ?>

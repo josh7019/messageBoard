@@ -4,7 +4,7 @@
     $loginUserId=(isset($_SESSION['userId']))?$_SESSION['userId']:-1;
     try {
         $message_model=new Message;
-    $message_list_detail=$message_model->getAllDetail($loginUserId);
+    $message_list_detail=getAllMessageDetail($loginUserId);
     // var_dump($message_list_detail);
     
     $data=[
@@ -12,7 +12,8 @@
         'messageList'=>$message_list_detail
     ];
     echo json_encode($data);
-    } catch(Exception $e){
+    } catch(Exception $e)
+    {
         echo "wrong:{$e->getMessage}";
     }
     

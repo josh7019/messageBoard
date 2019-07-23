@@ -1,4 +1,3 @@
-!<?php require_once('../command.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,15 +21,19 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href='index.php'>留言板</a>
+        <a class="navbar-brand" href='../views/index.php'>留言板</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <!-- <li class="a"><a href="../cont/signout.php">登出 <span class="sr-only"></span></a></li>
-            <li><a href="signup.php">註冊?</a></li> -->
-            <li class="a"><?php printLink();?></li>
+            {{if $is_login}}
+                <li class="a"><a href="../cont/signout.php">登出 <span class="sr-only"></span></a></li>
+            {{else}}
+                <li class="a"><a href="login.php">登入 <span class="sr-only"></span></a></li>
+                <li><a href="signup.php">註冊?</a></li> 
+            {{/if}}
+            <li class="a"></li>
         </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -42,38 +45,56 @@
 		<div class='col-md-4'></div>
         <div class="col-md-4">
 			<div class="list-group">
-				 <a  class="list-group-item list-group-item-action active" id='title'></a>
+				 <a  class="list-group-item list-group-item-action active" id='title'>標題:{{$message_detail.title}}</a>
 				<div class="list-group-item" style='background-color:GhostWhite' id='userName'>
-					xx說:
+					{{$message_detail.account}}說:
 				</div>
 				<div class="list-group-item " style='height:200px;background-color:GhostWhite' >
 					<h4 class="list-group-item-heading active" id='content'>
-						內容
+						{{$message_detail.content}}
 					</h4>
 				</div>
 				<div class="list-group-item justify-content-between" style='background-color:GhostWhite' id='timeAndThumb'>
-					2017-08-25 08:08:08<span class="badge badge-secondary badge-pill">讚15</span>
+					{{$message_detail.updated_at}}<span class="badge badge-secondary badge-pill">讚:{{$message_detail.thumb_count}}</span>
+				</div>
+                <div class="list-group-item justify-content-between" style='background-color:GhostWhite' id='timeAndThumb'>
+					<form action="../cont/add_reply.php" method='post'>
+                        <input type='hidden' name='messageId' value="{{$messageId}}">
+                        <textarea required name="content"></textarea> <button class="pull-right btn btn-info">回覆</button>
+                    </form>
+                    
 				</div> 
-                <a onclick='' class="list-group-item list-group-item-action justify-content-between">展開回覆<span class="badge badge-light badge-pill" id='replyCount'>14則</span></a>
-			</div>
+                <a onclick='replyShowOrHide()'  class="list-group-item list-group-item-action justify-content-between">
+                    <span id='hide_or_show'>展開回覆</span>
+                    <span class="badge badge-light badge-pill" id='replyCount'>{{$reply_count}}則</span>
+                </a>
+                <div style='display:none' id='reply'>
+                    
+                    {{foreach $reply_list as $reply_item}}
+                        <div class="list-group-item justify-content-between" style='background-color:GhostWhite' id='timeAndThumb'>
+                            {{$reply_item.content}}<span class="badge badge-secondary badge-pill">{{$reply_item.account}}</span>
+                        </div>
+                    {{/foreach}}
+
+                </div>
+            </div>
 		</div>
 	</div>
 </div>
-
-    
-    <input type="hidden" id='message' value='<?php echo (isset($_SESSION['message']))?$_SESSION['message']:''; ?>'>
     
     <!-- ------------------------------------------javascript------------------------------------------------------------ -->
     <!-- ------------------------------------------javascript------------------------------------------------------------ -->
     <!-- ------------------------------------------javascript------------------------------------------------------------ -->
     <script>
-        selectDetailMessage();
+        function replyShowOrHide(){
+            if($('#reply').css('display')=='block'){
+                $('#reply').css('display','none');
+                $('#hide_or_show').html('展開回覆');
+            }else{
+                $('#reply').css('display','block');
+                $('#hide_or_show').html('收起回覆');
+            }
 
-        function printDetailMessage(messageItem){
-            $('#title').html(`標題:${messageItem.title}`);
-            $('#userName').html(`${messageItem.account}說:`);
-            $('#content').html(`${messageItem.content}`);
-            $('#timeAndThumb').html(`${messageItem.updated_at}<span class="badge badge-secondary badge-pill">讚:${messageItem.thumb_count}</span>`);
         }
     </script>
 </body>

@@ -43,6 +43,44 @@
         ###############################  SELECT_ALL TEST AREA END  ############################
 
 
+        public function selectAllWithWhere($table,$select_list,$where_colum_list,$where_value_list,$type_string)
+        {
+            $where_colum_string='';
+            $where_value_string='';
+            $select_string='';
+            ##組成select字串
+            foreach($select_list as $select_single){
+                $select_string.=$select_single.',';
+            }
+            ##組成where字串
+            foreach($where_colum_list as $where_colum){
+                $where_colum_string.=$where_colum.',';
+            }
+            foreach($where_value_list as $where_value){
+                $where_value_string.='?,';
+            }
+            ##去逗號
+            $where_colum_string=substr($where_colum_string,0,strlen($where_colum_string)-1);
+            $where_value_string=substr($where_value_string,0,strlen($where_value_string)-1);
+            $select_string=substr($select_string,0,strlen($select_string)-1);
+            #組成sql語法
+            $sql="select $select_string from $table 
+            where ({$where_colum_string}) = ($where_value_string)";
+            $pre=$this->mysqli->prepare($sql);
+            $pre->bind_param($type_string,...$where_value_list);
+            $pre->execute();
+            $result=$pre->get_result();
+            $resultList=[];
+            $resultItem=[];
+                while($row=$result->fetch_assoc()){
+                    foreach($row as $key=>$value){
+                        $resultItem[$key]=$value;
+                    }
+                    $resultList[]=$resultItem;
+                }
+            return $resultList;
+        }
+
         ###############################  SELECT_SINGLE TEST AREA END  ############################
         
         public function selectSingle($table,$select_list,$where_colum_list,$where_value_list,$type_string)

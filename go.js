@@ -64,13 +64,13 @@
             row += `
             <tr>
                 <td>${messageItem.account}</td>
-                <td><a href='message_detail.php?messageId=${messageItem.messageId}'>${messageItem.title}</a></td>
+                <td><a href='../cont/select_detail_message.php?messageId=${messageItem.messageId}'>${messageItem.title}</a></td>
                 <td>${messageItem.thumb_count}</td>
                 <td>${messageItem.created_at}</td>
                 <td style="width:300px">
                     <span class=pull-right>`;
             row += (messageObject['loginUserId'] == messageItem.userId) ? `
-                        <a href='update.php?messageId=${messageItem.messageId}' class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>編輯</a>
+                        <a href='../views/update.php?messageId=${messageItem.messageId}' class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>編輯</a>
                         <button class="btn btn-danger" onclick='deleteMessage(${messageItem.messageId})'><span class="glyphicon glyphicon-trash"></span>刪除</button>`: '';
             row += (!messageItem.is_thumb)?`
                         <button class="btn btn-info" onclick='giveThumb(${messageItem.messageId},${messageItem.userId})'><span class="glyphicon glyphicon-thumbs-up"></span>讚</button>
@@ -166,7 +166,7 @@
             url:'../cont/edit_message.php',
             data:messageItem,
             success:function(){
-                window.location='index.php';            
+                window.location='../cont/index.php';            
             }
         })
     }

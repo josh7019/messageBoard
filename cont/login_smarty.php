@@ -1,15 +1,17 @@
 <?php
     include_once('../smarty/smarty_init.php');
     include_once('../mysql/all.php');
-    if(isset($_SESSION['message'])){
-        $alert_message=$_SESSION['message'];
+    if(isset($_COOKIE['message'])){
+        $alert_message=$_COOKIE['message'];
     }else{
         $alert_message='';
     }
-    $is_login=(isset($_SESSION['userId']))?true:false;
+    $user_item=checkToken();
+    $is_login=($user_item)?true:false;
+
 
     $smarty->assign('is_login',$is_login);
     $smarty->assign('message',$alert_message);
     $smarty->display('../views/login.tpl');
-    unset($_SESSION['message']);
+    // setcookie ("message", 0, time () + 3600 );
 ?>

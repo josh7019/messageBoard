@@ -6,7 +6,8 @@
     }else
     {
         $messageId=$_POST['messageId'];
-        $userId=$_SESSION['userId'];
+        $user_item=checkToken();
+        $userId=$user_item['userId'];
         $addOrRemove=$_POST['addOrRemove'];
     }
     

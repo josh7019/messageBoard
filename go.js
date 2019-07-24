@@ -8,7 +8,7 @@
 
 // 檢查帳號格式
     function checkFormat(str){   
-        if(str.match(/^[a-zA-Z][a-zA-Z0-9]{6,}$/)){
+        if(str.match(/^[a-zA-Z][a-zA-Z0-9]{6,20}$/)){
             // alert('true');
             return true;  
         }else{    
@@ -19,7 +19,7 @@
 
 // 檢查密碼格式
     function checkPasswordFormat(str){
-        if(str.match(/^[a-zA-Z0-9]{4,}$/)){
+        if(str.match(/^[a-zA-Z0-9]{4,20}$/)){
             // alert('true');
             return true; 
         }else{    
@@ -31,7 +31,7 @@
     //跳出alert視窗訊息
     function showMessage(){
         let message=$('#message').val();
-        if(message!=''){
+        if(message!=0){
             alert(message);
         }
     }
@@ -70,7 +70,7 @@
                 <td style="width:300px">
                     <span class=pull-right>`;
             row += (messageObject['loginUserId'] == messageItem.userId) ? `
-                        <a href='../views/update.php?messageId=${messageItem.messageId}' class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>編輯</a>
+                        <a href='../cont/update.php?messageId=${messageItem.messageId}' class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>編輯</a>
                         <button class="btn btn-danger" onclick='deleteMessage(${messageItem.messageId})'><span class="glyphicon glyphicon-trash"></span>刪除</button>`: '';
             row += (!messageItem.is_thumb)?`
                         <button class="btn btn-info" onclick='giveThumb(${messageItem.messageId},${messageItem.userId})'><span class="glyphicon glyphicon-thumbs-up"></span>讚</button>

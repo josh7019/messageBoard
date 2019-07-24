@@ -1,23 +1,23 @@
 <?php
     require_once('../mysql/all.php');
-        
+    
         if(!isset($_POST['messageId']))
         {
                 $data=['message'=>'刪除失敗,留言不存在'];
                 echo json_encode($data);
                 exit();
-        }else if(!isset($_SESSION['userId']))
+        }else if(!checkToken())
         {
                 $data=['message'=>'刪除失敗,請先登入'];
                 echo json_encode($data);
                 exit();
         }
       
-        if(isset($_POST['messageId'])&&(isset($_SESSION['userId'])))
+        if(isset($_POST['messageId'])&&(checkToken()))
         {
-                
+                $user_item=checkToken();
                 $messageId=$_POST['messageId'];
-                $userId=$_SESSION['userId'];
+                $userId=$user_item['userId'];
                 $message_model=new Message();
                 $message_item=$message_model->getOne($messageId);
                 

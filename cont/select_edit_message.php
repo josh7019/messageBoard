@@ -2,7 +2,7 @@
     require_once('../mysql/all.php');
     if(!isset($_POST['messageId']))
     {
-        $_SESSION['message']='留言不存在';
+        setcookie ("message",'留言不存在', time () + 3600 );
     }
     $messageId=$_POST['messageId'];
     

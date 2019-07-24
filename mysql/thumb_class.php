@@ -1,5 +1,4 @@
 <?php
-    include_once('model.php');
 
     class Thumb extends Model
     {
@@ -33,10 +32,5 @@
             return $is_success;
         }
     }
-
-
-
-
-
 
 ?>

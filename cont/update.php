@@ -6,10 +6,12 @@
     }else{
         $alert_message='';
     }
-    $is_login=(checkToken())?true:false;
+    $user_item=checkToken();
+    $is_login=($user_item)?true:false;
+
 
     $smarty->assign('is_login',$is_login);
     $smarty->assign('message',$alert_message);
-    $smarty->display('../views/index.tpl');
-    // setcookie("message",0, time() + 3600 );
+    $smarty->display('../views/update.tpl');
+    // setcookie ("message", 0, time () + 3600 );
 ?>

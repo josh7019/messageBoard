@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="zh-tw">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +30,7 @@
             {{if $is_login}}
                 <li class="a"><a href="../cont/signout.php">登出 <span class="sr-only"></span></a></li>
             {{else}}
-                <li class="a"><a href="login_smarty.php">登入 <span class="sr-only"></span></a></li>
+                <li class="a"><a href="login.php">登入 <span class="sr-only"></span></a></li>
                 <li><a href="../cont/signup_smarty.php">註冊?</a></li> 
             {{/if}}
         </ul>
@@ -45,17 +44,17 @@
         <div>
             <!-- 留言新增表格 -->
             <div id='addTodoList'>
-                <form class="form-horizontal" method='POST' action='../cont/addmessage.php'>
+                <form class="form-horizontal" id='editMessage'>
                         <fieldset>
                         
                         <!-- Form Name -->
-                        <legend>留言板</legend>
+                        <legend>編輯留言</legend>
                         
                         <!-- 標題-->
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textinput">標題</label>  
                           <div class="col-md-4">
-                          <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md">
+                          <input id="title" name="title" type="text" placeholder="" class="form-control input-md">
                             
                           </div>
                         </div>
@@ -64,7 +63,7 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textarea">內容</label>
                           <div class="col-md-4">                     
-                            <textarea  class="form-control" id="textarea" name="content"></textarea>
+                            <textarea  class="form-control" id="content" name="content"></textarea>
                           </div>
                         </div>
                         
@@ -72,55 +71,21 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for=""></label>
                           <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="button" onclick="editMessage()" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>修改</button>
+                            <a href='index.php' class="btn btn-info">取消</a>
                           </div>
                         </div>
                         
+
                         </fieldset>
                         </form>
                 
             </div><!-- 留言新增表格結束 -->
-            
-
-            <!-- 留言顯示區 -->
-                <table class="table table-striped" id='showTodoList'>
-                    <thead>
-                        <tr>
-                            <th>留言人</th>
-                            <th>標題</th>
-                            <th>讚</th>
-                            <th>留言時間</th>
-                        </tr>
-                    </thead>
-                    <tbody id='messageArea'>
-                        <!-- <tr >
-                            <td >not yet</td>
-                            <td ><a href="#">not yet</a> </td>
-                            <td >not yet</td>
-                            <th >not yet</th>
-                            <td style='width:300px'>
-                            <span class=pull-right>
-                            
-                            <button class="btn btn-success">
-                                <span class='glyphicon glyphicon-pencil'></span>編輯
-                            </button> | 
-                            <button class="btn btn-danger">
-                                <span class='glyphicon glyphicon-trash'></span>刪除
-                            </button>
-                            <button class="btn btn-info">
-                                <span class='glyphicon glyphicon-thumbs-up'></span>讚
-                            </button> | 
-                            </span>
-                            </td>               
-                        </tr> -->
-                    </tbody>
-                </table><!-- 留言顯示區結束 -->            
+                   
         </div>
     </div>
     <input type="hidden" id='message' value='{{$message}}'>
     
-    <!-- ------------------------------------------javascript------------------------------------------------------------ -->
-    <!-- ------------------------------------------javascript------------------------------------------------------------ -->
     <!-- ------------------------------------------javascript------------------------------------------------------------ -->
     
     <script>
@@ -134,11 +99,16 @@
         window.onload=function(){
             showMessage();
         }
-        //從資料庫取資料並顯示留言
-        goSelectMessage();
+        selectEditMessage();
+
+        function printEditMessage(messageItem){
+            messageItem=JSON.parse(messageItem);
+                // console.log(messageItem.title)
+                $('#title').val(messageItem.title);
+                $('#content').val(messageItem.content);
+            // console.log(messageItem);
+        }
     </script>
     <!-- 清除message -->
-
-
 </body>
 </html>

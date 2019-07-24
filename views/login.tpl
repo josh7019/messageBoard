@@ -36,7 +36,7 @@
                 <li class="a"><a href="../cont/signout.php">登出 <span class="sr-only"></span></a></li>
             {{else}}
                 <li class="a"><a href="login_smarty.php">登入 <span class="sr-only"></span></a></li>
-                <li><a href="signup.php">註冊?</a></li> 
+                <li><a href="../cont/signup_smarty.php">註冊?</a></li> 
             {{/if}}
         </ul>
         </div>
@@ -76,7 +76,7 @@
                 <label class="col-md-4 control-label" for="signin"></label>
                 <div class="col-md-4">
                   <button id="signin" name="signin" class="btn btn-info">登入</button>
-                  <a href="../views/signup.php" class='btn btn-success'>註冊</a>
+                  <a href="../cont/signup_smarty.php" class='btn btn-success'>註冊</a>
                 </div>
               </div>
 

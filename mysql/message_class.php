@@ -1,21 +1,19 @@
 <?php
-     include_once('model.php');
-     
      class Message extends Model 
      {
         private $table='message';        
         
-        ##取得所有留言資料
+        ## 取得所有留言資料
         public function getAll()
         {
-            $messageList=$this->selectAll($this->table,['*']);
+            $messageList = $this->selectAll($this->table, ['*']);
             return $messageList;
         }
 
         ##取得單筆留言資料
         public function getOne($messageId)
         {
-            $messageItem=$this->selectSingle($this->table,['*'],['messageId'],[$messageId],'i');
+            $messageItem = $this->selectSingle($this->table, ['*'], ['messageId'], [$messageId], 'i');
             return $messageItem;
         }
         

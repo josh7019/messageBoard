@@ -202,6 +202,7 @@
             $pre->bind_param($type_string,...$set_value_list,...$where_value_list);
             $pre->execute();
             return $pre->affected_rows;
+            // return ;
         }
 
         ###############################  UPDATE TEST AREA END  ############################

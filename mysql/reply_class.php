@@ -1,5 +1,5 @@
 <?php
-    // include_once('model.php');
+
     class Reply extends Model
     {
         private $table = 'reply';
@@ -22,11 +22,5 @@
             return $message_reply_list;
         }
     }
-
-
-
-
-
-
 
 ?>

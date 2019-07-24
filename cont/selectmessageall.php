@@ -1,7 +1,8 @@
 <?php
     include_once('../mysql/all.php');
     ##判斷是否登入
-    $loginUserId=(isset($_SESSION['userId']))?$_SESSION['userId']:-1;
+    $user_item=checkToken();
+    $loginUserId=($user_item)?$user_item['userId']:-1;
     try {
         $message_model=new Message;
         $message_list_detail=getAllMessageDetail($loginUserId);

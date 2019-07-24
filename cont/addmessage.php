@@ -2,23 +2,24 @@
     require_once('../mysql/all.php');
     require_once('../command.php');
     
-    if(isset($_POST['title'])&&(isset($_SESSION['userId'])))
+    if(isset($_POST['title'])&&(checkToken()))
     {
-        $userId=$_SESSION['userId'];
+        $user_item=checkToken();
+        $userId=$user_item['userId'];
         $title=$_POST['title'];
         $content=$_POST['content'];
         $message_model=new Message;
         $is_success=$message_model->addOne($userId,$title,$content);
-        $_SESSION['message']='新增成功';
+        setcookie ("message",'新增成功', time () + 3600 );
         header('Location:../cont/index.php');
-    }else if(!isset($_SESSION['userId']))
+    }else if(!checkToken())
     {
-        $_SESSION['message']='請先登入';
-        header('Location:../views/login.php');
+        setcookie ("message",'請先登入', time () + 3600 );
+        header('Location:../cont/login_smarty.php');
     }
     else
     {
-        $_SESSION['message']='新增失敗';
+        setcookie ("message",'新增失敗', time () + 3600 );
         header('Location:../cont/index.php');
     }
 

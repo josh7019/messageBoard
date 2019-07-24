@@ -21,7 +21,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href='../views/index.php'>留言板</a>
+        <a class="navbar-brand" href='../cont/index.php'>留言板</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -30,8 +30,8 @@
             {{if $is_login}}
                 <li class="a"><a href="../cont/signout.php">登出 <span class="sr-only"></span></a></li>
             {{else}}
-                <li class="a"><a href="login.php">登入 <span class="sr-only"></span></a></li>
-                <li><a href="signup.php">註冊?</a></li> 
+                <li class="a"><a href="../cont/login_smarty.php">登入 <span class="sr-only"></span></a></li>
+                <li><a href="../cont/signup_smarty.php">註冊?</a></li> 
             {{/if}}
             <li class="a"></li>
         </ul>

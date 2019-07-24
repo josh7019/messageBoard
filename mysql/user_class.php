@@ -1,5 +1,4 @@
 <?php
-    include_once('model.php');
 
     class User extends Model
     {
@@ -33,11 +32,20 @@
             return $is_success;
         }
 
+        ##加入token
+        public function addToken($token,$userId,$account)
+        {
+            $is_success=$this->update($this->table,['token'],[$token],['userId','account'],[$userId,$account],'sis');
+            return $is_success;
+        }
+
+        ##藉由token取得單一使用者資料
+        public function getUserByToken($token)
+        {
+            $user_item=$this->selectSingle($this->table,['userId','account'],['token'],[$token],'s');
+            return $user_item;
+        }
+
     }
-
-
-
-
-
 
 ?>

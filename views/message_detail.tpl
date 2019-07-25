@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src='../go.js'></script>
+    <script type="text/javascript" src='../script/go.js'></script>
     <title>Document</title>
 </head>
 <body>
@@ -49,10 +49,9 @@
 				<div class="list-group-item" style='background-color:GhostWhite' id='userName'>
 					{{$message_detail.account}}說:
 				</div>
-				<div class="list-group-item " style='height:200px;background-color:GhostWhite' >
-					<h4 class="list-group-item-heading active" id='content'>
-						{{$message_detail.content}}
-					</h4>
+				<div class="list-group-item " style='height:200px;background-color:GhostWhite' style="border:solid;overflow:scroll;">
+					<textarea disabled class="list-group-item-heading active" id='content' style="height:100%;width:100%;;">{{$message_detail.content}}
+					</textarea>
 				</div>
 				<div class="list-group-item justify-content-between" style='background-color:GhostWhite' id='timeAndThumb'>
 					{{$message_detail.updated_at}}<span class="badge badge-secondary badge-pill">讚:{{$message_detail.thumb_count}}</span>
@@ -60,7 +59,7 @@
                 <div class="list-group-item justify-content-between" style='background-color:GhostWhite' id='timeAndThumb'>
 					<form action="../cont/add_reply.php" method='post'>
                         <input type='hidden' name='messageId' value="{{$messageId}}">
-                        <textarea required name="content"></textarea> <button class="pull-right btn btn-info">回覆</button>
+                        <textarea placeholder="" required name="content" style='width:80%;'></textarea> <button class="pull-right btn btn-info">回覆</button>
                     </form>
                     
 				</div> 
@@ -82,20 +81,6 @@
 	</div>
 </div>
     
-    <!-- ------------------------------------------javascript------------------------------------------------------------ -->
-    <!-- ------------------------------------------javascript------------------------------------------------------------ -->
-    <!-- ------------------------------------------javascript------------------------------------------------------------ -->
-    <script>
-        function replyShowOrHide(){
-            if($('#reply').css('display')=='block'){
-                $('#reply').css('display','none');
-                $('#hide_or_show').html('展開回覆');
-            }else{
-                $('#reply').css('display','block');
-                $('#hide_or_show').html('收起回覆');
-            }
-
-        }
-    </script>
+    <script type="text/javascript" src='../script/message_detail.js'></script>
 </body>
 </html>

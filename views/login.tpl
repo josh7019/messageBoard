@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" 
     integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src='../go.js'></script>
+    <script type="text/javascript" src='../script/go.js'></script>
     <title>Document</title>
     <style>
         .myform{
@@ -84,31 +84,11 @@
         </form>
     </div>
     <input type="hidden" id='message' value='{{$message}}'>
+    
+    
+    <script type="text/javascript" src='../script/login.js'></script>
     <script>
-        let isAccountRight=true;
-        let isPasswordRight=false;
         
-        function checkAccountFormat(e){
-            isAccountRight=(checkFormat(e.target.value))?true:false;
-        }
-        function checkPassword(e){
-            isPasswordRight=(checkPasswordFormat(e.target.value))?true:false;    
-        }
-        //格式驗證正確後submit才能激活
-        function isSubmit(){
-            if(isAccountRight&&isPasswordRight){
-                return true;
-            }else if(isAccountRight==false){
-                alert('帳號格式錯誤');
-                return false;
-            }else {
-                alert('密碼格式錯誤');
-                return false;
-            }
-        }
-        window.onload=function(){
-            showMessage();
-        }
     </script>
     <!-- 清除message -->
 

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src='../go.js'></script>
+    <script type="text/javascript" src='../script/go.js'></script>
     <title>Document</title>
 </head>
 <body>
@@ -55,7 +55,7 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textinput">標題</label>  
                           <div class="col-md-4">
-                          <input id="textinput" name="title" type="text" placeholder="" class="form-control input-md">
+                          <input id="textinput" name="title" type="text" placeholder="上限30個字" class="form-control input-md">
                             
                           </div>
                         </div>
@@ -81,7 +81,6 @@
                 
             </div><!-- 留言新增表格結束 -->
             
-
             <!-- 留言顯示區 -->
                 <table class="table table-striped" id='showTodoList'>
                     <thead>
@@ -93,52 +92,13 @@
                         </tr>
                     </thead>
                     <tbody id='messageArea'>
-                        <!-- <tr >
-                            <td >not yet</td>
-                            <td ><a href="#">not yet</a> </td>
-                            <td >not yet</td>
-                            <th >not yet</th>
-                            <td style='width:300px'>
-                            <span class=pull-right>
-                            
-                            <button class="btn btn-success">
-                                <span class='glyphicon glyphicon-pencil'></span>編輯
-                            </button> | 
-                            <button class="btn btn-danger">
-                                <span class='glyphicon glyphicon-trash'></span>刪除
-                            </button>
-                            <button class="btn btn-info">
-                                <span class='glyphicon glyphicon-thumbs-up'></span>讚
-                            </button> | 
-                            </span>
-                            </td>               
-                        </tr> -->
                     </tbody>
                 </table><!-- 留言顯示區結束 -->            
         </div>
     </div>
-    <input type="hidden" id='message' value='{{$message}}'>
+    <input type="hidden" id='message' value='{{$message}}'>        
     
-    <!-- ------------------------------------------javascript------------------------------------------------------------ -->
-    <!-- ------------------------------------------javascript------------------------------------------------------------ -->
-    <!-- ------------------------------------------javascript------------------------------------------------------------ -->
     
-    <script>
-        //時間跳動
-        document.getElementById('nowTime').innerHTML=nowtime();
-        setInterval(function(){
-            document.getElementById('nowTime').innerHTML=nowtime();
-        },1000)
-        
-        //跳頁時顯示訊息
-        window.onload=function(){
-            showMessage();
-        }
-        //從資料庫取資料並顯示留言
-        goSelectMessage();
-    </script>
-    <!-- 清除message -->
-
-
+    <script type="text/javascript" src='../script/index.js'></script>
 </body>
 </html>

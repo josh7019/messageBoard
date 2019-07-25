@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src='../go.js'></script>
+    <script type="text/javascript" src='../script/go.js'></script>
     <title>Document</title>
 </head>
 <body>
@@ -54,7 +54,7 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textinput">標題</label>  
                           <div class="col-md-4">
-                          <input id="title" name="title" type="text" placeholder="" class="form-control input-md">
+                          <input id="title" name="title" type="text" placeholder="上限30個字" class="form-control input-md">
                             
                           </div>
                         </div>
@@ -63,7 +63,7 @@
                         <div class="form-group">
                           <label class="col-md-4 control-label" for="textarea">內容</label>
                           <div class="col-md-4">                     
-                            <textarea  class="form-control" id="content" name="content"></textarea>
+                            <textarea class="form-control" id="content" name="content"></textarea>
                           </div>
                         </div>
                         
@@ -86,29 +86,7 @@
     </div>
     <input type="hidden" id='message' value='{{$message}}'>
     
-    <!-- ------------------------------------------javascript------------------------------------------------------------ -->
     
-    <script>
-        //時間跳動
-        document.getElementById('nowTime').innerHTML=nowtime();
-        setInterval(function(){
-            document.getElementById('nowTime').innerHTML=nowtime();
-        },1000)
-        
-        //跳頁時顯示訊息
-        window.onload=function(){
-            showMessage();
-        }
-        selectEditMessage();
-
-        function printEditMessage(messageItem){
-            messageItem=JSON.parse(messageItem);
-                // console.log(messageItem.title)
-                $('#title').val(messageItem.title);
-                $('#content').val(messageItem.content);
-            // console.log(messageItem);
-        }
-    </script>
-    <!-- 清除message -->
+    <script type="text/javascript" src='../script/update.js'></script>
 </body>
 </html>

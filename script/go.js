@@ -38,7 +38,7 @@
 
 //取得資料庫所有留言
     function goSelectMessage(){
-        
+
         $.ajax({
             type:'POST',
             url:'../cont/selectmessageall.php',
@@ -59,6 +59,7 @@
         let messageArea = document.getElementById('messageArea');
         messageArea.innerHTML = '';
         // console.log(messageObject['messageList'])
+        // console.log(messageObject)
         for (let messageItem of messageObject['messageList']) {
             let row = '';
             row += `
@@ -73,8 +74,8 @@
                         <a href='../cont/update.php?messageId=${messageItem.messageId}' class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>編輯</a>
                         <button class="btn btn-danger" onclick='deleteMessage(${messageItem.messageId})'><span class="glyphicon glyphicon-trash"></span>刪除</button>`: '';
             row += (!messageItem.is_thumb)?`
-                        <button class="btn btn-info" onclick='giveThumb(${messageItem.messageId},${messageItem.userId})'><span class="glyphicon glyphicon-thumbs-up"></span>讚</button>
-                    `:` <button class="btn btn-warning" onclick='removeThumb(${messageItem.messageId},${messageItem.userId})'>收 <span class="glyphicon glyphicon-thumbs-down"></span></button>`;
+                        <button class="btn btn-info" onclick='giveThumb(${messageItem.messageId},${messageItem.userId})'><span class="glyphicon glyphicon-thumbs-up"></span>讚</button>`
+                        :` <button class="btn btn-warning" onclick='removeThumb(${messageItem.messageId},${messageItem.userId})'>收<span class="glyphicon glyphicon-thumbs-down"></span></button>`;
             row +=`</span>
                 </td>
             </tr>`;
@@ -116,14 +117,7 @@
             success:function(messageItem){
                 // console.log(messageItem);
                 printEditMessage(messageItem);
-            }
-            // 
-            // function(messageItem){       
-            //     messageItem=JSON.parse(messageItem);
-            //     // console.log(messageItem.title)
-            //     $('#title').val(messageItem.title);
-            //     $('#content').val(messageItem.content);
-            // }
+            },
         });
     }
 
@@ -166,12 +160,12 @@
             url:'../cont/edit_message.php',
             data:messageItem,
             success:function(){
-                window.location='../cont/index.php';            
+                window.location='../cont/index.php';          
             }
         })
     }
 
-
+    // 按讚
     function giveThumb(messageId,userId){
         $.ajax({
             type:'post',
@@ -184,9 +178,13 @@
             success:function(e){
                 console.log(e);
                 goSelectMessage();
+                // window.location='../cont/index.php';
+                
             }
         })
     }
+
+    // 收讚
     function removeThumb(messageId,userId){
         $.ajax({
             type:'post',
@@ -199,6 +197,7 @@
             success:function(e){
                 console.log(e);
                 goSelectMessage();
+                // window.location='../cont/index.php';
             }
         })
     }

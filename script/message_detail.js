@@ -1,3 +1,8 @@
+let replyShow=document.getElementById('replyShowOrHide');
+replyShow.onclick=function(){
+    replyShowOrHide();
+}
+
 function replyShowOrHide(){
     if($('#reply').css('display')=='block'){
         $('#reply').css('display','none');
@@ -8,3 +13,7 @@ function replyShowOrHide(){
     }
 
 }
+
+window.onload = function (){
+    showMessage();
+}  

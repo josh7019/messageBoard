@@ -7,27 +7,30 @@
     
     setcookie('message', 0, time()+3600);
     
-    ## 取得所有留言資料與細節
+    /*
+    * 取得所有留言資料與細節
+    */
     function getAllMessageDetail($loginUserId)
     {
         $message = new Message;
         $messageList = $message->getAll();
-        foreach($messageList as $index => $messageItem){            
+        foreach ($messageList as $index => $messageItem) {            
             $user = new User;
             $userItem = $user->getOneByUserId($messageItem['userId']);
             $messageList[$index]['account'] = $userItem['account'];
             $thumb = new Thumb;
             $thumb_count = $thumb->getOneCount($messageItem['messageId']);
             $messageList[$index]['thumb_count'] = $thumb_count;
-            
             $is_thumb = $thumb->getOne($messageItem['messageId'], $loginUserId);
             $is_thumb = (count($is_thumb)>0)?true:false;
             $messageList[$index]['is_thumb'] = $is_thumb;
         }
         return $messageList;
     }
-
-    ## 取得單筆留言資料與細節
+    
+    /*
+    * 取得單筆留言資料與細節
+    */
     function getOneMessageDetail($messageId)
     {
         $message = new message;
@@ -36,38 +39,40 @@
         $userItem = $user->getOneByUserId($messageItem['userId']);
         $messageItem['account'] = $userItem['account'];
         $thumb = new Thumb;
-        $thumb_count = $thumb->getOneCount($messageItem['userId']);
+        $thumb_count = $thumb->getOneCount($messageItem['messageId']);
         $messageItem['thumb_count'] = $thumb_count;
         return $messageItem;
     }
-
-    ## 產生token
+    
+    /*
+    * 產生token
+    */
     function getToken()
     {
         $random_string = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $token_string = '';
-        for($i=0; $i<250; $i++){
-            $token_string .= substr($random_string,rand(0,strlen($random_string)-1),1);
-    
+        for ($i=0; $i<250; $i++) {
+            $token_string .= substr($random_string, rand(0, strlen($random_string)-1), 1);
         }
         return $token_string;
     }
-
-    ## 檢查token並回傳資料
+    
+    /*
+    * 檢查token並回傳資料
+    */
     function checkToken()
     {
-        if(isset($_COOKIE['token'])){
+        if (isset($_COOKIE['token'])) {
             $token = $_COOKIE['token'];
             $user_model = new User;
             $user_item = $user_model->getUserByToken($token);
-            ## 判斷token是否取到資料
-            if(count($user_item)>0){
+            if ($user_item['userId']) {
                 return $user_item;
-            }else{
-                setcookie ("token", "delete", time () - 100 );
+            } else {
+                setcookie ("token", "delete", time()-100);
                 return false;
             }
-        }else{
+        } else {
             return false;
         }
     }

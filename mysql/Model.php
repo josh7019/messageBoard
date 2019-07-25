@@ -8,20 +8,19 @@
         private $password = '';
         private $db_name = 'messageboard2';
         private $mysqli;
-        
+
         public function __construct()
         {
             date_default_timezone_set('Asia/Taipei');
             $this->mysqli = new mysqli($this->server, $this->user, $this->password, $this->db_name);
             $this->mysqli->set_charset('utf8');
-            // var_dump($this->mysqli);
         }
-        
-        
+
+
         ###############################  SELECT_ALL TEST AREA   ############################
         public function selectAll($table, $select_list){
             $select_string = '';
-            foreach($select_list as $select_single){
+            foreach ($select_list as $select_single) {
                 $select_string .= $select_single.',';
             }
 
@@ -32,15 +31,15 @@
             $result = $pre->get_result();
             $resultList = [];
             $resultItem = [];
-                while($row = $result->fetch_assoc()){
-                    foreach($row as $key => $value){
+                while ($row = $result->fetch_assoc()) {
+                    foreach ($row as $key => $value) {
                         $resultItem[$key] = $value;
                     }
                     $resultList[] = $resultItem;
                 }
             return $resultList;
         }
-    
+
         ###############################  SELECT_ALL TEST AREA END  ############################
 
 
@@ -50,14 +49,14 @@
             $where_value_string = '';
             $select_string = '';
             ## 組成select字串
-            foreach($select_list as $select_single){
+            foreach ($select_list as $select_single) {
                 $select_string .= $select_single.',';
             }
             ## 組成where字串
-            foreach($where_colum_list as $where_colum){
+            foreach ($where_colum_list as $where_colum) {
                 $where_colum_string .= $where_colum.',';
             }
-            foreach($where_value_list as $where_value){
+            foreach ($where_value_list as $where_value) {
                 $where_value_string .= '?,';
             }
             ## 去逗號
@@ -73,8 +72,8 @@
             $result = $pre->get_result();
             $resultList = [];
             $resultItem = [];
-                while($row = $result->fetch_assoc()){
-                    foreach($row as $key => $value){
+                while ($row = $result->fetch_assoc()) {
+                    foreach ($row as $key => $value) {
                         $resultItem[$key] = $value;
                     }
                     $resultList[] = $resultItem;
@@ -83,21 +82,21 @@
         }
 
         ###############################  SELECT_SINGLE TEST AREA END  ############################
-        
+
         public function selectSingle($table, $select_list, $where_colum_list, $where_value_list, $type_string)
         {
             $where_colum_string = '';
             $where_value_string = '';
             $select_string = '';
             ## 組成select字串
-            foreach($select_list as $select_single){
+            foreach ($select_list as $select_single) {
                 $select_string .= $select_single.',';
             }
             ## 組成where字串
-            foreach($where_colum_list as $where_colum){
+            foreach ($where_colum_list as $where_colum) {
                 $where_colum_string .= $where_colum.',';
             }
-            foreach($where_value_list as $where_value){
+            foreach ($where_value_list as $where_value) {
                 $where_value_string .= '?,';
             }
             ## 去逗號
@@ -112,19 +111,19 @@
             $pre->execute();
             $result = $pre->get_result();
             $resultItem = [];
-                while($row = $result->fetch_assoc()){
-                    foreach($row as $key => $value){
+                while ($row = $result->fetch_assoc()) {
+                    foreach ($row as $key => $value) {
                         $resultItem[$key] = $value;
                     }
                 }
             return $resultItem;
         }
-        
-        
-        
-        
+
+
+
+
         ###############################  INSERT TEST AREA   ############################
-        
+
         public function insertInto($table, $insert_colum_list, $insert_value_list, $type_string)
         {  
             $insert_colum_string = '';
@@ -147,12 +146,12 @@
             return $pre->affected_rows;
         }
         ###############################  INSERT TEST AREA END  ############################
-    
-        
-        
+
+
+
         ###############################  DELETE TEST AREA START  ############################
-        
-        
+
+
         public function delete($table, $where_colum_list, $where_value_list, $type_string)
         {
             $where_colum_string = '';
@@ -177,7 +176,7 @@
 
 
         ###############################  UPDATE TEST AREA   ############################
-    
+
         public function update(
             $table,
             $set_colum_list,

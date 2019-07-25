@@ -1,3 +1,8 @@
+let edit=document.getElementById('editMessage');
+
+edit.onclick=function(){
+    editMessage();
+}
 //時間跳動
 document.getElementById('nowTime').innerHTML=nowtime();
 setInterval(function(){

@@ -27,5 +27,3 @@
             return $message_reply_list;
         }
     }
-
-?>

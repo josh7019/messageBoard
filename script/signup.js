@@ -1,8 +1,16 @@
 let isAccountRight=true;
-        let isPasswordRight=false;
-        let isPasswordTwice=false;
-        
-        //檢查帳號格式與資料庫有無相同帳號 
+let isPasswordRight=false;
+let isPasswordTwice=false;
+let account_input=document.getElementById('account');
+let password_input=document.getElementById('password');
+let passwordTwice_input=document.getElementById('passwordTwice');
+let signup_form=document.getElementById('signup_form');
+
+passwordTwice_input.oninput=function(event){confirmPassword(event)}
+account_input.oninput=function(event){checkAccountFormat(event)};
+password_input.oninput=function(event){checkPassword(event)};
+signup_form.onsubmit=function(){return isSubmit();};
+// 檢查帳號格式與資料庫有無相同帳號 
         function checkAccountFormat(e){
             if(checkFormat(e.target.value)){                
                 // ajax 到後端檢查帳號是否存在
@@ -67,9 +75,5 @@ let isAccountRight=true;
         
         //若有訊息則跳出訊息視窗
         window.onload=function(){
-            // let message=$('#message').val();
-            // if(message!=''){
-            // alert(message);
-            // }
             showMessage();
         }  

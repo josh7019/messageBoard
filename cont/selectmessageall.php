@@ -11,6 +11,6 @@
             'messageList' => $message_list_detail
         ];
     echo json_encode($data);
-    } catch(Exception $e) {
+    } catch (Exception $e) {
         echo "wrong:{$e->getMessage}";
     }

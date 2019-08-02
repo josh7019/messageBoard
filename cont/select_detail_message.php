@@ -40,7 +40,7 @@
 
     $reply_count = $reply_model->getCount($messageId);
     $user_item = checkToken();
-    $is_login = ($user_item)?true:false;
+    $is_login = ($user_item) ? true : false;
     
     $smarty->assign('message', $alert_message);
     $smarty->assign('is_login', $is_login);

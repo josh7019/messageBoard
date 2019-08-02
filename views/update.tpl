@@ -68,7 +68,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for=""></label>
                             <div class="col-md-4">
-                            <button id='editMessage' type="button" onclick="editMessage()" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>修改</button>
+                            <button id='editMessage_button' type="button" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>修改</button>
                             <a href='index.php' class="btn btn-info">取消</a>
                             </div>
                         </div>

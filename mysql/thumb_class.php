@@ -9,7 +9,12 @@
         */
         public function addOne($messageId, $userId)
         {
-            $affected_rows = $this->insertInto($this->table, ['messageId', 'userId'], [$messageId, $userId], 'ii');
+            $affected_rows = $this->insertInto(
+                $this->table,
+                ['messageId', 'userId'],
+                [$messageId, $userId],
+                'ii'
+            );
             return $affected_rows;
         }
 
@@ -18,7 +23,13 @@
         */ 
         public function getOne($messageId, $userId)
         {
-            $thumb_Item = $this->selectSingle($this->table, ['*'], ['messageId', 'userId'], [$messageId, $userId], 'ii');
+            $thumb_Item = $this->selectSingle(
+                $this->table, 
+                ['*'], 
+                ['messageId', 'userId'], 
+                [$messageId, $userId], 
+                'ii'
+            );
             return $thumb_Item;
         }
         
@@ -27,7 +38,13 @@
         */
         public function getOneCount($messageId)
         {    
-            $thumb_Item = $this->selectSingle($this->table, ['count(*)'], ['messageId'], [$messageId], 'i');
+            $thumb_Item = $this->selectSingle(
+                $this->table, 
+                ['count(*)'], 
+                ['messageId'], 
+                [$messageId], 
+                'i'
+            );
             return $thumb_Item['count(*)'];
         }
         
@@ -36,7 +53,12 @@
         */
         public function removeThumb($messageId, $userId)
         {
-            $is_success = $this->delete($this->table, ['messageId', 'userId'], [$messageId, $userId], 'ii');
+            $is_success = $this->delete(
+                $this->table, 
+                ['messageId', 'userId'], 
+                [$messageId, $userId], 
+                'ii'
+            );
             return $is_success;
         }
     }

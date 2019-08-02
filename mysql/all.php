@@ -22,7 +22,7 @@
             $thumb_count = $thumb->getOneCount($messageItem['messageId']);
             $messageList[$index]['thumb_count'] = $thumb_count;
             $is_thumb = $thumb->getOne($messageItem['messageId'], $loginUserId);
-            $is_thumb = (count($is_thumb)>0)?true:false;
+            $is_thumb = (count($is_thumb)>0) ? true : false;
             $messageList[$index]['is_thumb'] = $is_thumb;
         }
         return $messageList;
@@ -45,8 +45,8 @@
     }
     
     /*
-    * 產生token
-    */
+     * 產生token
+     */
     function getToken()
     {
         $random_string = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -58,8 +58,8 @@
     }
     
     /*
-    * 檢查token並回傳資料
-    */
+     * 檢查token並回傳資料
+     */
     function checkToken()
     {
         if (isset($_COOKIE['token'])) {
@@ -77,4 +77,3 @@
         }
     }
     
-?>

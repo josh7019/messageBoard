@@ -23,10 +23,10 @@
                 exit();
             }
 
-            if (count($message_item)>0) {
+            if (count($message_item) > 0) {
                 if ($message_item['userId'] == $userId) {
                     $is_success = $message_model->deleteOne($messageId);
-                    $data = ['message' => ($is_success)?'刪除成功':'刪除失敗'];
+                    $data = ['message' => ($is_success) ? '刪除成功' : '刪除失敗'];
                     echo json_encode($data);
                 } else {
                     $data = ['message' => '刪除失敗'];

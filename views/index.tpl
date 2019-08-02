@@ -45,7 +45,7 @@
             <div>
                 <!-- 留言新增表格 -->
                 <div id='addTodoList'>
-                    <form class="form-horizontal" method='POST' action='../cont/addmessage.php'>
+                    <form id='add_message_form' class="form-horizontal" method='POST' action='../cont/addmessage.php'>
                         <fieldset>
                         <!-- Form Name -->
                             <legend>留言板</legend>
@@ -53,14 +53,14 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="textinput">標題</label>  
                                 <div class="col-md-4">
-                                    <input id="textinput" name="title" type="text" placeholder="上限30個字" class="form-control input-md">
+                                    <input id="title" name="title" type="text" placeholder="上限30個字" class="form-control input-md">
                                 </div>
                             </div>
                             <!-- 內容 -->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="textarea">內容</label>
                                 <div class="col-md-4">                     
-                                    <textarea  class="form-control" id="textarea" name="content"></textarea>
+                                    <textarea  class="form-control" id="content" name="content"></textarea>
                                 </div>
                             </div>
                             <!-- 按鈕 -->

@@ -129,12 +129,12 @@
             $insert_colum_string = '';
             $insert_value_string = '';
             ## 組成insert字串
-                foreach($insert_colum_list as $insert_colum){
+                foreach ($insert_colum_list as $insert_colum) {
                     $insert_colum_string .= $insert_colum.',';
                 }
                 $insert_colum_string = substr($insert_colum_string, 0, strlen($insert_colum_string)-1);
                 
-                foreach($insert_value_list as $insert_value){
+                foreach ($insert_value_list as $insert_value) {
                     $insert_value_string .= '?,';
                 }
             ## 去掉尾端逗號
@@ -157,10 +157,10 @@
             $where_colum_string = '';
             $where_value_string = '';
             ## 組成where字串
-                foreach($where_colum_list as $where_colum){
+                foreach ($where_colum_list as $where_colum) {
                     $where_colum_string .= $where_colum.',';
                 }
-                foreach($where_value_list as $where_value){
+                foreach ($where_value_list as $where_value) {
                     $where_value_string .= '?,';
                 }
             ## 去逗號
@@ -190,14 +190,14 @@
             $where_colum_string = '';
             $where_value_string = '';
             ## 組成set字串
-                foreach($set_colum_list as $set_colum){
+                foreach ($set_colum_list as $set_colum) {
                     $set_colum_string .= $set_colum.' = ?,';
                 }
             ## 組成where字串
-                foreach($where_colum_list as $where_colum){
+                foreach ($where_colum_list as $where_colum) {
                     $where_colum_string .= $where_colum.',';
                 }
-                foreach($where_value_list as $where_value){
+                foreach ($where_value_list as $where_value) {
                     $where_value_string .= '?,';
                 }
             ## 去逗號
@@ -214,5 +214,3 @@
 
         ###############################  UPDATE TEST AREA END  ############################
     }
-
-?>

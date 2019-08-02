@@ -17,7 +17,13 @@
         */
         public function getOne($messageId)
         {
-            $messageItem = $this->selectSingle($this->table, ['*'], ['messageId'], [$messageId], 'i');
+            $messageItem = $this->selectSingle(
+                $this->table,
+                ['*'],
+                ['messageId'],
+                [$messageId],
+                'i'
+            );
             return $messageItem;
         }
         
@@ -42,7 +48,12 @@
         */
         function deleteOne($messageId)
         {
-            $is_success = $this->delete($this->table, ['messageId'], [$messageId], 'i');
+            $is_success = $this->delete(
+                $this->table,
+                ['messageId'],
+                [$messageId],
+                'i'
+            );
             return $is_success;
         }
 
@@ -61,5 +72,3 @@
             return $is_success;
         }
     }
-
-?>

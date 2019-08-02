@@ -32,7 +32,7 @@
         }
 
     } elseif(checkToken()) {
-        setcookie ("message", '重複登入',time()+3600 );
+        setcookie ("message", '重複登入', time()+3600 );
         header('Location:../cont/index.php');
         exit();
     } else {

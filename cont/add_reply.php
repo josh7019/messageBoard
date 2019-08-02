@@ -24,3 +24,4 @@
 
     $location = "Location:../cont/select_detail_message.php?messageId=$messageId";
     header($location);
+    

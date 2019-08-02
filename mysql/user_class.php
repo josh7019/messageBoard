@@ -9,7 +9,13 @@
          */
         public function getOneByUserId($userId)
         {
-            $user = $this->selectSingle('user', ['*'], ['userId'], [$userId], 'i');
+            $user = $this->selectSingle(
+            'user', 
+            ['*'], 
+            ['userId'], 
+            [$userId], 
+            'i'
+        );
             return $user;
         }
         
@@ -18,7 +24,13 @@
         */
         public function getOneByAccount($account)
         {
-            $user = $this->selectSingle('user', ['*'], ['account'], [$account], 's');
+            $user = $this->selectSingle(
+                'user', 
+                ['*'], 
+                ['account'], 
+                [$account], 
+                's'
+            );
             return $user;
         }
         
@@ -36,7 +48,12 @@
          */
         public function signup($account, $password)
         {
-            $is_success = $this->insertInto($this->table, ['account', 'password'], [$account, $password], 'ss');
+            $is_success = $this->insertInto(
+                $this->table,
+                ['account', 'password'], 
+                [$account, $password], 
+                'ss'
+            );
             return $is_success;
         }
         
@@ -61,7 +78,13 @@
         */
         public function getUserByToken($token)
         {
-            $user_item = $this->selectSingle($this->table, ['userId', 'account'], ['token'], [$token], 's');
+            $user_item = $this->selectSingle(
+                $this->table, 
+                ['userId', 'account'], 
+                ['token'], 
+                [$token], 
+                's'
+            );
             return $user_item;
         }
 

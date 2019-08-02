@@ -8,22 +8,18 @@ function nowtime(){
 
 // 檢查帳號格式
 function checkFormat(str){   
-    if(str.match(/^[a-zA-Z][a-zA-Z0-9]{6,20}$/)){
-        // alert('true');
+    if (str.match(/^[a-zA-Z][a-zA-Z0-9]{6,20}$/)) {
         return true;  
-    }else{    
-        // alert('false');
+    } else {    
         return false;
     }
 }
 
 // 檢查密碼格式
 function checkPasswordFormat(str){
-    if(str.match(/^[a-zA-Z0-9]{4,20}$/)){
-        // alert('true');
+    if (str.match(/^[a-zA-Z0-9]{4,20}$/)) {
         return true; 
-    }else{    
-        // alert('false');
+    } else {    
         return false;
     }
 }
@@ -44,7 +40,6 @@ function goSelectMessage(){
         url : '../cont/selectmessageall.php',
         data : {'get':'get'},
         success : function(messageList){
-            console.log(JSON.parse(messageList));
             printMessage(JSON.parse(messageList));
         }
     })
@@ -54,9 +49,8 @@ function goSelectMessage(){
 function printMessage(messageObject){
     let messageArea = document.getElementById('messageArea');
     messageArea.innerHTML = '';
-    // console.log(messageObject['messageList'])
-    // console.log(messageObject)
     for (let messageItem of messageObject['messageList']) {
+        unhtmlspecialchars(messageItem.title);
         let row = '';
         row += `
         <tr>
@@ -131,8 +125,6 @@ function selectDetailMessage(){
     });
 }
     
-    
-    
 // 送出編輯留言
 function editMessage(){
     if(!confirm('確定修改嗎?')){
@@ -188,3 +180,71 @@ function removeThumb(messageId,userId){
         }
     })
 }
+
+// 檢查帳號格式與資料庫有無相同帳號 
+function checkAccountFormat(e){
+    if(checkFormat(e.target.value)){                
+        // ajax 到後端檢查帳號是否存在
+        $.ajax({
+            type:'post',
+            url:'../cont/getaccount.php',
+            data:{account:e.target.value},
+            // num_rows為查詢資料筆數
+            success:function(num_rows){
+                if(num_rows>0){
+                    isAccountRight=false;
+                    $('#account_Signal').html('已有相同帳號');       
+                }else{
+                    $('#account_Signal').html('ok');
+                    isAccountRight=true;
+                } 
+            }
+        })
+    }else{
+        $('#account_Signal').html('x');
+        isAccountRight=false;
+    }
+}
+
+// 檢查密碼格式
+function checkPassword(e){
+    if(checkPasswordFormat(e.target.value)){
+        isPasswordRight=true;
+        isPasswordTwice=false;
+        $('#password_Signal').html('ok');
+        $('#passwordTwice_Signal').html('密碼不相同');
+    }else{
+        isPasswordRight=false;
+        isPasswordTwice=false;
+        $('#passwordTwice_Signal').html('密碼不相同');
+        $('#password_Signal').html('格式錯誤');
+    }
+
+}
+
+// 二次驗證輸入密碼
+function confirmPassword(e){
+    let password='';
+    password=$('#password').val();
+    if(e.target.value==password){
+        isPasswordTwice=true;
+        $('#passwordTwice_Signal').html('ok');
+    }else{
+        isPasswordTwice=false;
+        $('#passwordTwice_Signal').html('密碼不相同');
+    }
+
+}
+
+// 將html字元轉譯回符號
+function unhtmlspecialchars(ch) {
+    if (ch===null) return '';
+    ch = ch.replace("&quot;","\"");
+    ch = ch.replace("&#039;","\'");
+    ch = ch.replace("&lt;","<");
+    ch = ch.replace("&gt;",">");
+    ch = ch.replace("&amp;","&");
+    return ch;
+    }
+
+// 送出註冊資料

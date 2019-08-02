@@ -2,7 +2,7 @@
     require_once('../mysql/all.php');
     
     if (!isset($_POST['messageId'])) {
-        $data = ['message' =>'failed'];
+        $data = ['message' => 'failed'];
         echo json_encode($data);
         $_COOKIE['message'] = '編輯失敗';
         exit();
@@ -19,13 +19,12 @@
         $message_model = new Message;
         $is_success = $message_model->updateOne($messgeId, $title, $content, $datetime);
         if ($is_success == 1) {
-            
-            $data = ['message' =>$is_success];
+            $data = ['message' => $is_success];
             echo json_encode($data);
             setcookie ("message", '編輯成功', time()+3600 );
             exit();
         } else {
-            $data = ['message' =>$is_success];
+            $data = ['message' => $is_success];
             echo json_encode($data);
             setcookie ("message", '編輯失敗', time()+3600 );
             exit();

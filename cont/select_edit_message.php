@@ -7,8 +7,8 @@
     $messageId = $_POST['messageId'];
     $message_model = new Message;
     $message_item = getOneMessageDetail($messageId);
-    if($message_item['title']){
+    if ($message_item['title']) {
         echo json_encode($message_item);
-    }else{
+    } else {
         echo "wrong";
     }
